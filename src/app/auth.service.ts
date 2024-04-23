@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -8,7 +8,7 @@ export class AuthService {
   requestUrl = 'http://localhost:8080'
   constructor(private http: HttpClient) { }
 
-  authenticate(projectKey: string, projectPassKey: string) {
-    return this.http.post('http://localhost:8080/authenticate', { projectKey, projectPassKey })
+  authenticate (key: string, passKey: string) {
+    return this.http.post<HttpResponse<null> | HttpErrorResponse>('http://localhost:8080/authenticate', { key, passKey });
   }
 }
